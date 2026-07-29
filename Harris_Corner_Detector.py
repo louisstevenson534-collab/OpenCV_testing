@@ -1,7 +1,7 @@
 import numpy as np
 import cv2 as cv
 
-filename = 'chip.png' #sample photo for corner detection
+filename = str(input('input desired test photo: ')) #sample photo for corner detection
 img = cv.imread(filename)
 
 '''crop the photo to isolate point of interest'''
@@ -18,7 +18,8 @@ gray = cv.cvtColor(cropped_img,cv.COLOR_BGR2GRAY) #turn cropped image grayscale 
 
 gray = np.float32(gray)
 dst = cv.cornerHarris(gray,2,3,0.04)
-num_corners = print(cv.countNonZero(dst))
+num_corners = int(cv.countNonZero(dst))
+print('number of corners detected: ', num_corners)
 
 '''result is dilated for marking the corners, not important'''
 dst = cv.dilate(dst,None)
